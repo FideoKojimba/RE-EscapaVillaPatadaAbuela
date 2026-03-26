@@ -15,6 +15,10 @@ public class PlayerMovementModel : MonoBehaviour
     // Velocidad de movimiento del personaje.
     [SerializeField] private float moveSpeed = 5f;
 
+    [SerializeField] private float jumpForce = 5f;
+
+    private bool IsGrounded;
+
     // Velocidad horizontal actual del personaje.
     public Vector3 CurrentHorizontalVelocity { get; private set; }
 
@@ -44,6 +48,8 @@ public class PlayerMovementModel : MonoBehaviour
     {
         // Mueve el rigidbody.
         Move();
+
+        Jump();
 
         // Actualiza velocidad y dirección real.
         UpdateVelocityData();
@@ -90,6 +96,34 @@ public class PlayerMovementModel : MonoBehaviour
             Debug.Log($"[PlayerMovementModel] Velocidad aplicada al Rigidbody: {rb.linearVelocity}");
         }
     }
+
+    private void Jump() 
+    {
+        if (playerInputController.JumpInput == true && IsGrounded ==true) 
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            IsGrounded = false;
+        }
+
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Suelo"))
+        {
+            IsGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Suelo"))
+        {
+            IsGrounded = false;
+        }
+    }
+
+
 
     private void UpdateVelocityData()
     {
