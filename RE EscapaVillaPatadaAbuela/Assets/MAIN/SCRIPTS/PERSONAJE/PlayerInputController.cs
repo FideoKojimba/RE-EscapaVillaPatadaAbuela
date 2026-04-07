@@ -7,10 +7,12 @@ public class PlayerInputController : MonoBehaviour
     // Referencia privada a la acción de movimiento del Input System.
     private InputAction _moveAction;
     private InputAction _jumpAction;
+    [SerializeField] private PlayerMovementModel _movementModel;
 
     // Propiedad pública de solo lectura.
     public Vector2 MoveInput { get; private set; }
     public bool JumpInput { get; private set; }
+    public bool _jumpRequested;
 
     private void Start()
     {
@@ -44,10 +46,19 @@ public class PlayerInputController : MonoBehaviour
 
     }
 
-    private void Update()
+    void Update()
     {
-        // Si no existe la acción, salimos.
+        // Capturamos el input en cada frame para no perder ninguna pulsación
+        if (_jumpAction != null && _movementModel.IsGrounded == true && _jumpAction.WasPressedThisFrame())
+        {
+            _jumpRequested = true;
+        }
+    }
+    private void FixedUpdate()
+    {
         if (_moveAction == null) return;
+
+        MoveInput = _moveAction.ReadValue<Vector2>();
 
         if (_jumpAction == null) return;
 
@@ -61,14 +72,18 @@ public class PlayerInputController : MonoBehaviour
             Debug.Log($"[PlayerInputController] Input detectado: {MoveInput}");
         }
 
-        if (JumpInput == true)
+        if (_jumpRequested == true)
         {
+
             Debug.Log($"[PlayerInputController] Input detectado: {JumpInput}");
+            
+
+            Debug.Log("[PlayerInputController] Salto ejecutado con éxito.");
         }
 
-
-
     }
+
+
 
     private void OnDisable()
     {

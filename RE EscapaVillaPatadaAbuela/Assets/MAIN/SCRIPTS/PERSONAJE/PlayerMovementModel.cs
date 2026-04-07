@@ -17,7 +17,7 @@ public class PlayerMovementModel : MonoBehaviour
 
     [SerializeField] private float jumpForce = 5f;
 
-    private bool IsGrounded;
+    public bool IsGrounded;
 
     // Velocidad horizontal actual del personaje.
     public Vector3 CurrentHorizontalVelocity { get; private set; }
@@ -99,10 +99,19 @@ public class PlayerMovementModel : MonoBehaviour
 
     private void Jump() 
     {
-        if (playerInputController.JumpInput == true && IsGrounded ==true) 
+        if (playerInputController._jumpRequested)
+        {
+            Debug.Log($"Intento de salto: Grounded es {IsGrounded}");
+        
+        }
+
+        Debug.Log ("No salta");
+        if (playerInputController._jumpRequested == true && IsGrounded ==true) 
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             IsGrounded = false;
+            playerInputController._jumpRequested = false;
+            Debug.Log("¡Saltando!");
         }
 
     }
