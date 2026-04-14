@@ -7,6 +7,9 @@ TagManager:
   - Suelo
   - MuerteInstantanea
   - Enemigo
+  - Heal
+  - Shield
+  - Speed
   layers:
   - Default
   - TransparentFX
