@@ -143,7 +143,7 @@ public class PlayerMovementModel : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Suelo"))
+        if (collision.gameObject.CompareTag("Suelo")|| collision.gameObject.CompareTag("Veneno"))
         {
             IsGrounded = true;
         }
@@ -151,7 +151,7 @@ public class PlayerMovementModel : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Suelo"))
+        if (collision.gameObject.CompareTag("Suelo")|| collision.gameObject.CompareTag("Veneno"))
         {
             IsGrounded = false;
         }

@@ -38,6 +38,12 @@ public class LeonStats : MonoBehaviour
     private AudioClip sonidoEscudo;
     [SerializeField] 
     private Animator animator;
+    [SerializeField] 
+    private GameObject panelFinal;
+    [SerializeField] 
+    private AudioClip musicaVictoria;
+    [SerializeField]
+     private AudioSource audioSourceMusicaFondo;
     private bool esInvencible = false;
      private Color colorOriginal;
 
@@ -63,6 +69,15 @@ public class LeonStats : MonoBehaviour
    
     }
 
+
+        private void OnCollisionEnter(Collision collision)
+    {
+    // Si tocamos el veneno
+        if (collision.gameObject.CompareTag("Veneno"))
+        {
+        KnockbackEnemigo(collision.collider);
+        }
+    }
     
 
     private void OnTriggerEnter(Collider collider)
@@ -90,6 +105,12 @@ public class LeonStats : MonoBehaviour
     
               Destroy(collider.gameObject);
             }
+
+        if (collider.CompareTag("Meta"))
+             {
+                 MostrarFinal();
+                Destroy(collider.gameObject); 
+             }
 
         
 
@@ -200,6 +221,28 @@ IEnumerator ActivarSpeedBoost()
     movementModel.moveSpeed = velocidadOriginal;
 
     Debug.Log("Velocidad normalizada");
+}
+
+void MostrarFinal()
+{
+    if (panelFinal != null)
+    {
+      if (audioSourceMusicaFondo != null && musicaVictoria != null)
+        {
+            audioSourceMusicaFondo.Stop();            // Paramos la música vieja
+            audioSourceMusicaFondo.clip = musicaVictoria; // Ponemos la nueva
+            audioSourceMusicaFondo.loop = true;       // Nos aseguramos de que sea un bucle
+            audioSourceMusicaFondo.Play();            // ¡A celebrar!
+        }
+        panelFinal.SetActive(true); 
+        Debug.Log("¡JUEGO COMPLETADO! ¡MUEJEJEJE!");
+        
+        Time.timeScale = 0f; 
+
+        
+        if (movementModel != null) movementModel.enabled = false;
+    
+    }
 }
 
 }
