@@ -11,6 +11,7 @@ TagManager:
   - Shield
   - Speed
   - Veneno
+  - Meta
   layers:
   - Default
   - TransparentFX
