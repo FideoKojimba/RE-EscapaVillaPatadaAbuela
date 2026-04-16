@@ -5,7 +5,6 @@ public class LeonStats : MonoBehaviour
 {
 
     public float Vida = 3;
-    private Vector3 checkPoint;
 
     [SerializeField] 
     private float fuerzaKnockback = 10f; 
@@ -229,10 +228,10 @@ void MostrarFinal()
     {
       if (audioSourceMusicaFondo != null && musicaVictoria != null)
         {
-            audioSourceMusicaFondo.Stop();            // Paramos la música vieja
-            audioSourceMusicaFondo.clip = musicaVictoria; // Ponemos la nueva
-            audioSourceMusicaFondo.loop = true;       // Nos aseguramos de que sea un bucle
-            audioSourceMusicaFondo.Play();            // ¡A celebrar!
+            audioSourceMusicaFondo.Stop();           
+            audioSourceMusicaFondo.clip = musicaVictoria; 
+            audioSourceMusicaFondo.loop = true;      
+            audioSourceMusicaFondo.Play();          
         }
         panelFinal.SetActive(true); 
         Debug.Log("¡JUEGO COMPLETADO! ¡MUEJEJEJE!");
