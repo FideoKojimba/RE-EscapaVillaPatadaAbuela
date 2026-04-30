@@ -7698,6 +7698,9 @@ PrefabInstance:
       addedObject: {fileID: 674863386}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dee344b381fe9674b86e91ece1ec1f29, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 674863388}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dee344b381fe9674b86e91ece1ec1f29, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 674863387}
   m_SourcePrefab: {fileID: 100100000, guid: dee344b381fe9674b86e91ece1ec1f29, type: 3}
 --- !u!1 &674863377 stripped
@@ -7721,11 +7724,11 @@ MonoBehaviour:
   rb: {fileID: 674863381}
   moveSpeed: 5
   jumpForce: 5
-  animator: {fileID: 674863380}
   audioSource: {fileID: 674863387}
   sonidoSalto: {fileID: 8300000, guid: 94802c37cdfc6ae4dae033b55277f6b3, type: 3}
   IsGrounded: 0
   jumpCooldown: 0.2
+  playerView: {fileID: 674863388}
 --- !u!136 &674863379
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7856,6 +7859,7 @@ MonoBehaviour:
   objetoEscudo: {fileID: 1117738544}
   audioSource: {fileID: 674863387}
   movementModel: {fileID: 674863378}
+  playerView: {fileID: 674863388}
   multiplicadorVelocidad: 3
   duracionSpeedBoost: 5
   sonidoSpeed: {fileID: 8300000, guid: 0a23e10b372802d4d95d1acc8452882d, type: 3}
@@ -7980,6 +7984,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &674863388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674863377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e7b54bc65bc0d4ebc43c33bfae4109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 674863380}
+  playerMovementModel: {fileID: 674863378}
 --- !u!43 &694371078
 Mesh:
   m_ObjectHideFlags: 0

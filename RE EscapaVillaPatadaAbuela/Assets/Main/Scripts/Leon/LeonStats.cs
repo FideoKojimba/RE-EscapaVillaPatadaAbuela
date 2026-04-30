@@ -22,6 +22,8 @@ public class LeonStats : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] 
     private PlayerMovementModel movementModel;
+    [SerializeField]
+    private PlayerView playerView;
     [SerializeField] 
     private float multiplicadorVelocidad = 2f;
     [SerializeField] 
@@ -127,8 +129,8 @@ public class LeonStats : MonoBehaviour
 
                 if (animator != null)
             {
-                animator.SetTrigger("HealTrigger");
-            }
+                    playerView.UpdateAnimationTest(PlayerView.Animaciones.Heal);
+                }
 
                 if (audioSource != null && sonidoCuracion != null)
                 {

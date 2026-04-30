@@ -17,7 +17,6 @@ public class PlayerMovementModel : MonoBehaviour
 
     [SerializeField] private float jumpForce = 5f;
 
-    [SerializeField] private Animator animator;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip sonidoSalto;
 
@@ -31,6 +30,8 @@ public class PlayerMovementModel : MonoBehaviour
 
     // Magnitud de la velocidad horizontal.
     public float CurrentSpeed { get; private set; }
+
+    [SerializeField] private PlayerView playerView;
 
     // NUEVO:
     // Dirección actual del movimiento en el plano XZ.
@@ -53,7 +54,7 @@ public class PlayerMovementModel : MonoBehaviour
 
     private void Update()
     {
-     
+
 
     }
 
@@ -66,8 +67,8 @@ public class PlayerMovementModel : MonoBehaviour
 
         // Actualiza velocidad y dirección real.
         UpdateVelocityData();
-        
-        animator.SetFloat("Speed", CurrentSpeed);
+
+
     }
 
     private void Move()
@@ -112,7 +113,7 @@ public class PlayerMovementModel : MonoBehaviour
         }
     }
 
-    private void Jump() 
+    public  void Jump() 
     {
         if (playerInputController._jumpRequested)
         {
@@ -131,8 +132,8 @@ public class PlayerMovementModel : MonoBehaviour
         }
             
             lastJumpTime = Time.time;
-            animator.SetTrigger("JumpTrigger");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerView.UpdateAnimationTest(PlayerView.Animaciones.Salto);
             IsGrounded = false;
             playerInputController._jumpRequested = false;
             Debug.Log("¡Saltando!");
