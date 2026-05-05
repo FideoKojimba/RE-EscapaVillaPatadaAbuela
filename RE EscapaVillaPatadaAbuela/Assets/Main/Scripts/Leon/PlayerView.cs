@@ -34,11 +34,6 @@ public class PlayerView : MonoBehaviour
                 animator.SetTrigger("HealTrigger");
                 break;
 
-
-
-
-
-
         }
 
    }
